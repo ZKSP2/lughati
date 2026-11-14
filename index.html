@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>لغتي الجميلة</title>
+<style>
+:root{--bg:#f4f1e9;--ink:#1d1a14;--mut:#857c6c;--gold:#f6c22a;--deep:#b8860b;--surf:#fffdf8;--line:#e3dccd}
+@media(prefers-color-scheme:dark){:root{--bg:#14120e;--ink:#f3eee2;--mut:#9d9484;--surf:#201d17;--line:#38332a}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,'Segoe UI',Tahoma,sans-serif;
+min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center}
+.w{max-width:420px}
+h1{font-size:26px;font-weight:800;margin-bottom:8px}
+p{font-size:16px;font-weight:600;color:var(--mut);line-height:1.9;margin-bottom:18px}
+a{display:block;background:var(--ink);color:var(--gold);text-decoration:none;font-size:17px;font-weight:800;
+padding:16px;border-radius:16px;margin-top:10px}
+a.g{background:var(--surf);color:var(--ink);border:2px solid var(--line)}
+.sp{width:34px;height:34px;margin:0 auto 16px;border:4px solid var(--line);border-top-color:var(--deep);
+border-radius:50%;animation:s 1s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="w" id="w">
+<div class="sp"></div>
+<h1>لغتي الجميلة</h1>
+<p>جاري فتح الدرس…</p>
+</div>
+<script>
+(function(){
+  var MAP = {
+    r0:"t1", l1:"t1", l2:"t1", l3:"t1", s1:"t1", t1:"t1", f1:"t1",
+    l4:"t1", l5:"t1", l6:"t1", s2:"t1", t2:"t1", f2:"t1",
+    l7:"t1", l8:"t1", l9:"t1", s3:"t1", t3:"t1", f3:"t1"
+  };
+  var DEFAULT = "t1";
+  function param(n){
+    try{
+      var m = new RegExp("[?&]" + n + "=([^&#]*)").exec(location.search);
+      return m ? decodeURIComponent(m[1].replace(/\+/g, " ")) : "";
+    }catch(e){ return ""; }
+  }
+  var l = (param("l") || "").trim();
+  var file = (l && MAP[l]) ? MAP[l] : DEFAULT;
+  var target = file + ".html" + (l ? "#" + encodeURIComponent(l) : "");
+  var t = setTimeout(function(){
+    document.getElementById("w").innerHTML =
+      '<h1>لغتي الجميلة</h1>' +
+      '<p>لو الصفحة مافتحتش لوحدها، دوسي هنا.</p>' +
+      '<a href="' + target + '">افتح الدرس</a>' +
+      '<a class="g" href="' + DEFAULT + '.html">افتح الصفحة الرئيسية</a>';
+  }, 2500);
+  try{ location.replace(target); }catch(e){ clearTimeout(t); location.href = target; }
+})();
+</script>
+<noscript>
+<p>من فضلك فعّل الجافاسكريبت، أو افتح الصفحة الرئيسية مباشرة.</p>
+<a href="t1.html">افتح الصفحة الرئيسية</a>
+</noscript>
+</body>
+</html>
